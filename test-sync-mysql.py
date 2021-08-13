@@ -14,8 +14,9 @@ import time
 host_a = "10.0.21.209"
 host_b = "10.0.21.210"
 user = "master"
-passwd = "xxx123xx"
+passwd = "Neopath123!"
 db_name = "opensips_3_1"
+n_inserts = 10
 
 def ExecuteSQLCreate(host, user, passwd, sql):
     con = MySQLdb.connect(host=host, user=user, passwd=passwd)
@@ -47,13 +48,24 @@ print ("Count DB A:",len(resultsa))
 
 print ("Count DB B:",len(resultsb))
 
-print ("Inserting data")
-for i in range(10000):     
+print ("Inserting data in DB A")
+for i in range(n_inserts):     
+    guid = uuid.uuid4() 
+    sql= "INSERT INTO subscriber (username,domain,password,email_address ) VALUES ('%s', 'neo.neo', 'Neopath123!', '');"%(guid)
+    ExecuteSQLCreate(host_a,user,passwd,sql)
+
+time.sleep(2)
+
+
+print ("Inserting data in DB B")
+for i in range(n_inserts):     
     guid = uuid.uuid4() 
     sql= "INSERT INTO subscriber (username,domain,password,email_address ) VALUES ('%s', 'neo.neo', 'Neopath123!', '');"%(guid)
     ExecuteSQLCreate(host_b,user,passwd,sql)
 
 time.sleep(2)
+
+
 
 sql = "SELECT * FROM subscriber"
 
