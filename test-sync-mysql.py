@@ -14,7 +14,7 @@ import time
 host_a = "10.0.21.209"
 host_b = "10.0.21.210"
 user = "master"
-passwd = "Neopath123!"
+passwd = "xxx123xx"
 db_name = "opensips_3_1"
 
 def ExecuteSQLCreate(host, user, passwd, sql):
